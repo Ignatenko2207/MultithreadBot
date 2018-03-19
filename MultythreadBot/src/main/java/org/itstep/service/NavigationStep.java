@@ -36,7 +36,13 @@ public class NavigationStep extends Thread{
 		
 		for (Element aElement : itemElements) {
 			if(aElement.attr("href") != null) {
-				ProductStep nextStep = new ProductStep(this.keyword, this.url, aElement.attr("href"));
+				
+				String url = aElement.attr("href");
+				if(url.startsWith("//www")) {
+					url = "https:" + url;
+				}
+				
+				ProductStep nextStep = new ProductStep(this.keyword, this.url, url);
 				nextStep.start();
 			}
 		}
