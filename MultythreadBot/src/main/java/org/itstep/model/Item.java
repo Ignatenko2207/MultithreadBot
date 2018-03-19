@@ -16,22 +16,25 @@ import lombok.Setter;
 public class Item {
 	
 	@Id
-	@Column( name = "article_id" )
+	@Column(name = "article_id")
 	private String articleId;
+		
+	@Column(name = "parent_url", length = 800)
+	private String parentUrl;
 	
-	@Column( name = "item_name" )
+	@Column(name = "item_url", length = 800, nullable=false)
+	private String itemUrl;
+	
+	@Column(name = "img_url", length = 800)
+	private String imgUrl;
+	
+	@Column(name = "item_name", nullable=false)
 	private String name;
 	
-	@ManyToOne
-	private KeyWord keyWord;
+	@Column(name = "price")
+	private Integer price;
 	
-	public Item() {
-	}
-
-	public Item(String articleId, String name, KeyWord keyWord) {
-		this.articleId = articleId;
-		this.name = name;
-		this.keyWord = keyWord;
-	}
+	@ManyToOne(targetEntity = KeyWord.class)
+	private KeyWord keyword;
 
 }

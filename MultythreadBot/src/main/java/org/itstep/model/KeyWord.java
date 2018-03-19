@@ -15,14 +15,14 @@ import lombok.Setter;
 public class KeyWord {
 
 	@Id
-	@Column( name = "keyword")
-	private String keyword;
+	@Column(name="key")
+	private String key;
 	
 	public KeyWord() {
 	}
 
-	public KeyWord(String keyword) {
-		this.keyword = keyword;
+	public KeyWord(String key) {
+		this.key = key;
 	}
 	
 	
