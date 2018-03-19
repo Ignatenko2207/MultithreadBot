@@ -1,22 +1,14 @@
 package org.itstep.util;
 
-import java.io.File;
-
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.itstep.model.Item;
+import org.itstep.model.KeyWord;
 
 public class HibernateUtil {
 
-	private static SessionFactory sessionFactory;
-
-	public HibernateUtil() throws HibernateException {
-		sessionFactory = configureSessionFactory();
-	}
+	private static SessionFactory sessionFactory = configureSessionFactory();
 
 	/**
 	 * Create SessionFactory
@@ -24,9 +16,13 @@ public class HibernateUtil {
 	 * @return {@link SessionFactory}
 	 * @throws HibernateException
 	 */
-	private SessionFactory configureSessionFactory() throws HibernateException {
+	private static SessionFactory configureSessionFactory() throws HibernateException {
 
-		Configuration configuration = new Configuration().configure();
+		Configuration configuration = new Configuration();
+		
+		configuration.addAnnotatedClass(Item.class);
+		configuration.addAnnotatedClass(KeyWord.class);
+		
 		return configuration.buildSessionFactory();
 
 	}
@@ -36,7 +32,7 @@ public class HibernateUtil {
 	 *
 	 * @return {@link SessionFactory}
 	 */
-	public SessionFactory getSessionFactory() {
+	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 }
